@@ -10,18 +10,18 @@ En este proyecto se desarrollaron modelos de clasificación supervisada utilizan
 ## 🎯 Objetivos
 - ✅ Explorar y comprender el conjunto de datos disponible.
 - ✅ Preparar los datos para el entrenamiento de algoritmos de clasificación.
-- ✅ Dividir la información en conjuntos de entrenamiento, validación y prueba (estratificación).
+- ✅ Dividir la información en conjuntos de entrenamiento, validación y prueba.
 - ✅ Entrenar diferentes algoritmos de Machine Learning (Árbol de Decisión y Random Forest).
-- ✅ Ajustar hiperparámetros para optimizar el rendimiento de los modelos.
+- ✅ Ajustar hiperparámetros (`n_estimators` y `max_depth`) para optimizar el rendimiento.
 - ✅ Comparar el desempeño entre distintas arquitecturas y seleccionar la de mayor exactitud.
-- ✅ Verificar que el modelo seleccionado supere el umbral mínimo de exactitud establecido por Megaline ($\text{Accuracy} > 75\%$).
+- ✅ Verificar que el modelo supere el umbral mínimo de exactitud establecido por Megaline ($\text{Accuracy} > 75\%$).
 - ✅ Realizar una prueba de cordura (*sanity check*) para validar la utilidad real de los resultados.
 
 ## 🛠️ Herramientas y Habilidades Utilizadas
 * **Lenguaje:** Python
-* **Librerías:** Pandas, NumPy, Scikit-Learn y Matplotlib
-* **Entorno:** Jupyter Notebook
-* **Técnicas:** Clasificación supervisada, Ajuste de hiperparámetros, Validación cruzada/estratificada, Modelos ensamblados (Random Forest) y Pruebas de cordura (*Dummy Classifier*).
+* **Librerías:** Pandas, NumPy, [Scikit-Learn](https://github.com/NICOLAS-8110) y Matplotlib
+* **Entorno:** [Jupyter Notebook](https://github.com/santidata7/Iota-megaline-plan-recommendation/blob/main/%CE%99_Proyecto_Iota___Recomendaci%C3%B3n_de_Planes_de_Megaline.ipynb)
+* **Técnicas:** Clasificación supervisada, Optimización de hiperparámetros, Modelos ensamblados (Random Forest) y Pruebas de cordura (*Dummy Classifier*).
 
 ## 📊 Fuente de Datos
 El proyecto utiliza un dataset histórico con el comportamiento mensual de los clientes de Megaline:
@@ -34,37 +34,32 @@ El proyecto utiliza un dataset histórico con el comportamiento mensual de los c
   * `is_ultra`: Variable objetivo (`1 = Ultra`, `0 = Smart`).
 
 ## ⚙️ Metodología
-1. **Exploración inicial:** Revisión de la estructura, tipos de datos, valores ausentes y duplicados (confirmando alta calidad inicial sin requerir limpieza compleja).
-2. **Preparación del problema:** Creación de la variable categórica `Name_plan` para representar las clases (*Smart* y *Ultra*) y definición de características (*features*) y objetivo (*target*).
-3. **División estratificada:** Partición de los datos conservando la proporción original de clases: **60% Entrenamiento, 20% Validación y 20% Prueba**.
-4. **Entrenamiento y optimización:**
-   * **Árbol de decisión:** Evaluación de hiperparámetros (`max_depth = 8`, logrando `79.63%` de exactitud).
-   * **Bosque aleatorio (Random Forest):** Evaluación de combinaciones de árboles y profundidad (`n_estimators = 76`, `max_depth = 12`, alcanzando `81.34%`).
-5. **Evaluación final:** Prueba del modelo óptimo sobre el conjunto de prueba independiente y ejecución de prueba de cordura mediante un `DummyClassifier`.
+1. **Exploración inicial:** Revisión de la estructura, tipos de datos, valores ausentes y duplicados (confirmando alta calidad inicial).
+2. **Preparación y partición:** División del dataset en conjuntos de entrenamiento, validación y prueba para evaluar adecuadamente el modelo.
+3. **Optimización de hiperparámetros:** Barrido iterativo probando diferentes combinaciones de número de árboles (`n_estimators`) y profundidad máxima (`max_depth`) usando `RandomForestClassifier`.
+4. **Evaluación final y prueba de cordura:** Validación del rendimiento con datos independientes y comparación contra la clase mayoritaria (~69.7%) para asegurar que el modelo aprende patrones reales.
 
 ## 💡 Principales Hallazgos y Modelos Evaluados
-* **Árbol de Decisión:** Destacó por su fácil interpretación y rápido entrenamiento, alcanzando un desempeño sólido pero con menor capacidad de generalización.
-* **Bosque Aleatorio (*Random Forest*):** Obtuvo el mejor rendimiento global, ofreciendo mayor estabilidad, robustez frente a variaciones y una exactitud superior.
-* **Prueba de Cordura:** El modelo seleccionado superó ampliamente al clasificador base por frecuencia (`69.36%`), confirmando que aprendió patrones reales del comportamiento del usuario en lugar de aprovechar sesgos de distribución.
+* **Bosque Aleatorio (*Random Forest*):** Demostró ser el algoritmo con mejor desempeño general frente a alternativas como Árboles de Decisión o Regresión Logística.
+* **Optimización:** La mejor configuración encontrada en validación fue con `n_estimators = 10` y `max_depth = 10`.
+* **Prueba de Cordura:** El modelo superó con claridad el límite de la clase mayoritaria, confirmando su capacidad predictiva útil para el negocio.
 
 ## 📈 Resultados Clave
 | Modelo / Evaluación | Exactitud (Accuracy) |
 | :--- | :--- |
-| **Árbol de Decisión** (Optimizado) | 79.63% |
-| **Bosque Aleatorio** (Validación) | 81.34% |
-| **Bosque Aleatorio** (Conjunto de Prueba) | **81.80%** |
-| **Clasificador Ficticio** (Prueba de Cordura) | 69.36% |
+| **Bosque Aleatorio** (Conjunto de Validación) | **81.49%** |
+| **Bosque Aleatorio** (Conjunto de Prueba) | **81.18%** |
+| **Línea Base / Clase Mayoritaria** (Prueba de Cordura) | **69.70%** |
 
-*El resultado final en prueba (**81.80%**) supera con holgura el umbral mínimo exigido por la compañía ($\text{Accuracy} > 75\%$).*
+*El resultado obtenido (**81.18%** en test) supera con holgura el umbral mínimo exigido por la compañía ($\text{Accuracy} > 75\%$).*
 
 ## 📈 Visualizaciones Desarrolladas
-* Distribución de clases en el dataset original y en los subconjuntos de entrenamiento, validación y prueba.
-* Evolución de la exactitud del árbol de decisión según los distintos niveles de profundidad.
-* Gráficos comparativos de rendimiento entre los algoritmos evaluados.
+* Distribución y estadísticas descriptivas de las variables de consumo.
+* Gráficos de evolución de exactitud según la variación de hiperparámetros en el modelo de bosque aleatorio.
 
 ## 📂 Archivos Principales
-* `iota_megaline_plan_recommendation.ipynb` (o `Ι_Proyecto_Iota___Recomendación_de_Planes_de_Megaline.ipynb`)
+* `iota_megaline_plan_recommendation.ipynb` (o [Ι_Proyecto_Iota___Recomendación_de_Planes_de_Megaline.ipynb](https://github.com/santidata7/Iota-megaline-plan-recommendation/blob/main/%CE%99_Proyecto_Iota___Recomendaci%C3%B3n_de_Planes_de_Megaline.ipynb))
 * `users_behavior.csv`
 
 ## 🏁 Conclusión
-El proyecto permitió desarrollar con éxito un modelo de Machine Learning capaz de automatizar la recomendación de los nuevos planes comerciales de Megaline (*Smart* y *Ultra*) a partir del consumo mensual de los usuarios. El modelo **Random Forest** demostró un rendimiento sobresaliente cercano al **82% de exactitud**, superando ampliamente las expectativas de negocio y la prueba de cordura. Estos hallazgos proporcionan a Megaline una herramienta analítica sólida para impulsar su estrategia comercial, facilitar la migración de clientes y optimizar la personalización de sus ofertas.
+El proyecto permitió desarrollar con éxito un modelo de Machine Learning capaz de automatizar la recomendación de los nuevos planes comerciales de Megaline (*Smart* y *Ultra*) a partir del consumo mensual de los usuarios. El modelo **Random Forest** demostró un rendimiento sólido superando el **81% de exactitud**, cumpliendo holgura con los requisitos del negocio y pasando exitosamente la prueba de cordura. Estos hallazgos proporcionan a Megaline una herramienta analítica confiable para facilitar la migración de clientes y optimizar sus estrategias comerciales.
