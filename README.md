@@ -58,7 +58,7 @@ El proyecto utiliza un dataset histórico con el comportamiento mensual de los c
 * Gráficos de evolución de exactitud según la variación de hiperparámetros en el modelo de bosque aleatorio.
 
 ## 📂 Archivos Principales
-* `iota_megaline_plan_recommendation.ipynb` (o [Ι_Proyecto_Iota___Recomendación_de_Planes_de_Megaline.ipynb](https://github.com/santidata7/Iota-megaline-plan-recommendation/blob/main/%CE%99_Proyecto_Iota___Recomendaci%C3%B3n_de_Planes_de_Megaline.ipynb))
+* `iota_megaline_plan_recommendation.ipynb` (o [Ι_Proyecto_Iota___Recomendación_de_Planes_de_Megaline.ipynb]
 * `users_behavior.csv`
 
 ## 🏁 Conclusión
