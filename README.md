@@ -19,8 +19,8 @@ En este proyecto se desarrollaron modelos de clasificación supervisada utilizan
 
 ## 🛠️ Herramientas y Habilidades Utilizadas
 * **Lenguaje:** Python
-* **Librerías:** Pandas, NumPy, [Scikit-Learn](https://github.com/NICOLAS-8110) y Matplotlib
-* **Entorno:** [Jupyter Notebook](https://github.com/santidata7/Iota-megaline-plan-recommendation/blob/main/%CE%99_Proyecto_Iota___Recomendaci%C3%B3n_de_Planes_de_Megaline.ipynb)
+* **Librerías:** Pandas, NumPy, [Scikit-Learn] y Matplotlib
+* **Entorno:** [Jupyter Notebook]
 * **Técnicas:** Clasificación supervisada, Optimización de hiperparámetros, Modelos ensamblados (Random Forest) y Pruebas de cordura (*Dummy Classifier*).
 
 ## 📊 Fuente de Datos
